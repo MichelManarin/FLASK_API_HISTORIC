@@ -26,7 +26,7 @@ def get_historic():
         cur2 = conn.cursor()
         cur2.execute("SELECT * FROM HISTORICO_TEMPO WHERE IDHISTORICO = " + str(i[0]))
         for x in cur2:
-            aux = {'data' : x[2], 'min' : x[3], 'max':x[4]}
+            aux = {'data' : x[2], 'min' : x[4], 'max':x[3]}
             DicionarioTempo = aux
             ListaTempo.append(DicionarioTempo)
         cur2.close()
