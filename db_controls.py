@@ -10,33 +10,33 @@ def get_historic():
     cur = conn.cursor()
     cur.execute("SELECT * FROM HISTORICO ORDER BY DATA DESC")
 
-    rows_city=0
-    rows_weather=0
+    linhasCidade = 0
+
+    ListaHistorico = []
+    ListaTempo = []
 
     DicionarioHistorico = {}
-    ListaHistorico = []
     DicionarioItemHistorico = {}
-    ListaTempo = []
     DicionarioTempo = {}
+
     aux = {}
-    aux2 = {}
     
     for i in cur:
-        rows_weather = 0
-        rows_city=rows_city+1
+        linhasCidade=linhasCidade+1
         cur2 = conn.cursor()
         cur2.execute("SELECT * FROM HISTORICO_TEMPO WHERE IDHISTORICO = " + str(i[0]))
         for x in cur2:
-            rows_weather = rows_weather + 1
-            aux2 = {'data' : x[2], 'min' : x[3], 'max':x[4]}
-            DicionarioTempo = aux2
+            aux = {'data' : x[2], 'min' : x[3], 'max':x[4]}
+            DicionarioTempo = aux
             ListaTempo.append(DicionarioTempo)
+        cur2.close()
         aux = {'city' : i[2], 'data' : i[1], 'tempo':ListaTempo}
         ListaTempo = []
-        DicionarioItemHistorico['historico'+str(rows_city)] = aux
+        DicionarioItemHistorico['historico'+str(linhasCidade)] = aux
     ListaHistorico.append(DicionarioItemHistorico)
     DicionarioHistorico["Historico"] = ListaHistorico
-            
+
+    conn.close() 
     return jsonify(DicionarioHistorico)
     
 def insert_historic(*data):
@@ -51,8 +51,8 @@ def insert_historic(*data):
         conn.commit()
         previsao = x["previsao"]
         for i in previsao:
-            sql = "INSERT INTO HISTORICO_TEMPO(IDHISTORICO,DATA,MAXTEMP,MINTEMP) VALUES((SELECT MAX(IDHISTORICO) FROM HISTORICO), current_date, "
-            sql = sql + i["max_temp"] + "," + i["min_temp"] + ")" 
+            sql = "INSERT INTO HISTORICO_TEMPO(IDHISTORICO,DATA,MAXTEMP,MINTEMP) VALUES((SELECT MAX(IDHISTORICO) FROM HISTORICO), "
+            sql = sql + "'" + i["data"] + "'" + "," + i["max_temp"] + "," + i["min_temp"] + ")" 
             cur2.execute(sql)
             conn.commit() 
 
