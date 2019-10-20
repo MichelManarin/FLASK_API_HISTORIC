@@ -13,4 +13,5 @@ Python: 3.7
 Optei por utilizar o "ElephantSQL - PostgreSQL as a Service" pela simplicidade e facilidade.
 
 ## Deploy
-https://michelmanarin.github.io/weather-app/#/
+https://weather-app-api-michel-manarin.herokuapp.com/historic (get)
+https://weather-app-api-michel-manarin.herokuapp.com/inserthistoric (post)
