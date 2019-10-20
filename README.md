@@ -4,7 +4,9 @@ API responsável por busca e inserção de dados de histórico de busca da aplic
 
 ## Dependências
 Flask: 0.12.2
+
 psycopg2: 2.8 
+
 Python: 3.7
 	
 ## Banco de dados utilizado
