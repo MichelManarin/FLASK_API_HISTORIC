@@ -14,4 +14,6 @@ Optei por utilizar o "ElephantSQL - PostgreSQL as a Service" pela simplicidade e
 
 ## Deploy
 https://weather-app-api-michel-manarin.herokuapp.com/historic (get)
+
 https://weather-app-api-michel-manarin.herokuapp.com/inserthistoric (post)
+
